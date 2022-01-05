@@ -1,0 +1,203 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+/* 導覽列 */
+nav{
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  background-color: rgb(51, 51, 51);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navlink a{
+  text-decoration: none;
+  color: white;
+  margin: 0px 10px;
+}
+.loginbtn{
+  background-color: rgb(75, 149, 194);
+  color: white;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 2px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+/* 首頁會員列表 */
+.wrap{
+  padding-top: 60px;
+}
+.wrap h2{
+  letter-spacing: 3px;
+  font-size: 28px;
+  width: 300px;
+  margin: 50px auto;
+}
+.userwrap{
+  width: 90%;
+  margin: auto;
+  /* background-color: rgb(255, 191, 255); */
+}
+.user{
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  padding: 20px;
+  transition: .3s;
+  cursor: pointer;
+  /* background-color: violet; */
+}
+.user:hover{
+  background-color: rgb(253, 244, 214);
+}
+
+.avatar{
+  width: 100%;
+  height: 90%;
+  /* background-color: wheat; */
+  position: relative;
+}
+.avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.gendericon{
+  width: 30px;
+  height: 30px;
+  background-color: violet;
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  border-radius: 50px;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+}
+.username{
+  box-sizing: border-box;
+  padding-left: 8px;
+  background-color: rgba(0, 0, 0, 0.459);
+  color: white;
+  /* text-align: center; */
+  position: absolute;
+  height: 25px;
+  line-height: 25px;
+  letter-spacing: 1px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.live{
+  width: 100%;
+  color: rgb(165, 165, 165);
+}
+
+/* 登入頁 */
+.login-background{
+  background-color: rgb(245, 245, 245);
+}
+.infowrap{
+  position: absolute;
+  top: 10;
+  left: 10;
+}
+.login-success,
+.login-fail{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  font-size: 16px;
+  color: white;
+  line-height: 50px;
+  text-align: center;
+  padding: 0px 20px;
+}
+/* 登入成功 */
+.login-success{
+  background-color: rgb(28, 106, 54);
+  display: none;
+}
+/* 登入失敗 */
+.login-fail{
+  background-color: rgb(203, 68, 74);
+  display: none;
+}
+
+
+.loginwrap{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  margin: auto;
+}
+.txt-login{
+  margin: 20px 0px;
+  font-size: 20px;
+  font-weight: 300;
+}
+/* 輸入框 */
+.inputwrap{
+  width: 90%;
+  border: 1px solid lightslategrey;
+  border-radius: 5px;
+}
+.loginwrap input{
+  box-sizing: border-box;
+  padding-left: 5px;
+  width: 100%;
+  height: 35px;
+  border: none;
+  /* background-color: rgb(232, 240, 254); */
+}
+.loginwrap input:focus{
+  outline: none;
+}
+
+::placeholder{
+  font-size: 16px;
+}
+.btn-wrap{
+  margin-top: 20px;
+  width: 90%;
+  display: flex;
+  height: 35px;
+  background-color: transparent;
+  border: 1px solid #4b95c2;
+  border-radius: 3px;
+}
+.btn-wrap button{
+  width: 50%;
+  border: none;
+  background-color: transparent;
+  color: #4b95c2;
+  font-size: 16px;
+  cursor: pointer;
+}
+.btn-wrap button:first-child{
+  color: white;
+  background-color: #4b95c2;
+}
+.btn-wrap button:focus{
+  outline: 5px solid #4b94c272;
+}
+
+.inputwrap:first-child{
+  border-bottom: 1px solid lightslategrey;
+}
+
+.copyright{
+  margin-top: 50px;
+  color: lightslategray;
+}
