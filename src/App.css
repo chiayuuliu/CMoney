@@ -28,7 +28,7 @@ nav{
   margin-right: 10px;
   cursor: pointer;
 }
-/* 首頁會員列表 */
+/* 首頁會員圖表 */
 .wrap{
   padding-top: 60px;
 }
@@ -41,6 +41,8 @@ nav{
 .userwrap{
   width: 90%;
   margin: auto;
+  display: flex;
+  flex-wrap: wrap;
   /* background-color: rgb(255, 191, 255); */
 }
 .user{
@@ -66,7 +68,7 @@ nav{
 .avatar img{
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 .gendericon{
   width: 30px;
@@ -201,3 +203,5 @@ nav{
   margin-top: 50px;
   color: lightslategray;
 }
+
+/* 首頁 會員圖 */

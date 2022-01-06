@@ -2,17 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const Login = (props) => {
-
-    // 拿資料
-    useEffect(() => {
-        const data =[]
-        console.log('in')
-        fetch('https://randomuser.me/api/')
-        .then(r=>r.json())
-        .then(data=>{
-            console.log(data.results)
-        })
-    }, []);
     
     const [emailInput, setEmailInput] = useState('')
     const [pwdInput, setpwdInput] = useState('')
