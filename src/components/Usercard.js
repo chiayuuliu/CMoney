@@ -9,7 +9,7 @@ const Usercard = (props) => {
     // 判斷性別
     useEffect(() => {
         if(gender=='male'){
-
+            setIcondisplay(true)
         }if(gender=='female'){
 
             setIcondisplay(false)
@@ -20,17 +20,18 @@ const Usercard = (props) => {
     <div class="user">
         <div class="avatar">
         {/* 頭貼 */}
+        
             <img src={avatar} alt=""/>
-            <div class="gendericon">
-                {/* 性別icon */}
-                <i class="fas fa-male"
-                style={{display:icondisplay ? 'block' : 'none'}}></i>
-
-                <i class="fas fa-female"
-                style={{display:icondisplay ? 'none' : 'block'}}></i>
-                
+            {/* 女 */}
+            <div class="femaleicon" 
+            style={{display:icondisplay ? 'none' : 'block'}}>
+                <i class="fas fa-female"></i>                
             </div>
-            {/* <i class="fas fa-male"></i> */}
+            {/* 男 */}
+            <div class="maleicon" 
+            style={{display:icondisplay ? 'block' : 'none'}}>
+                <i class="fas fa-male"></i>
+            </div>
             {/* 姓名 */}
             <div class="username">{name}</div>
         </div>
