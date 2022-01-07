@@ -13,13 +13,29 @@ import Admin from './pages/Admin';
 function App() {
 
   const [ userData, setUserData] = useState([])
-  // 拿資料
+  const [totalpage, setTotalpage] = useState(8)
+  const [ pageAr, setPageAr] = useState([]);
+
+  function page(totalpage) {
+    const pagination = []
+    let i =1
+    for (let i = 1 ; i<=totalpage ; i++){
+      pagination.push(i)
+    }
+    if(i=totalpage){
+      setPageAr(pagination)
+      console.log(pageAr)
+    }
+  }
+  // 拿全部資料
   useEffect(() => {        
-    fetch('https://randomuser.me/api/?results=20')
+    fetch('https://randomuser.me/api/?results=150')
     .then(r=>r.json())
     .then(data=>{
         let user = data.results;
+        // 設定資料跟總頁數
         setUserData(user)
+        setTotalpage(Math.ceil(user.length/20))
     })
 }, []);
 
@@ -33,7 +49,7 @@ function App() {
     <Router>
       <Switch>
         {/* 自選清單頁 */}
-        <Route path="/customer">
+        <Route path="customer">
         </Route>
         {/* 會員列表 */}
         <Route path="/admin">
@@ -47,6 +63,7 @@ function App() {
         <Route path="/">
           <Cmoney
             userData={userData}
+            totalpage={totalpage}
           />
         </Route>        
       </Switch>
