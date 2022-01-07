@@ -11,16 +11,14 @@ const Usercard = (props) => {
         if(gender=='male'){
             setIcondisplay(true)
         }if(gender=='female'){
-
             setIcondisplay(false)
         }
     }, [gender]);
     return (
     <>
-    <div class="user">
+    
         <div class="avatar">
         {/* 頭貼 */}
-        
             <img src={avatar} alt=""/>
             {/* 女 */}
             <div class="femaleicon" 
@@ -38,7 +36,6 @@ const Usercard = (props) => {
         {/* 國家、州別 */}
         <div class="live">{country}</div>
         <div class="live">{city}</div>
-    </div>
     </>
     );
 };

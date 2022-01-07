@@ -25,7 +25,8 @@ const Pagination = (props) => {
                 <div className={nowPage==v ? 'page nowpage' : 'page'}
                 onClick={()=>{
                     setNowPage(v)
-                }}>{v}</div>)})
+                }}>{v}</div>
+                )})
             }
         
     {/* 後一頁 */}

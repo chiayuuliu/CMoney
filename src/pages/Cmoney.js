@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Usercard from './../components/Usercard';
 import Pagination from './../components/Pagination';
+import Userdetail from './../components/Userdetail';
 
 const Cmoney = (props) => {
     const {userData, totalpage} = props
@@ -13,6 +14,9 @@ const Cmoney = (props) => {
     const [ displayUser, setDisplayUser] = useState([])
     // 設定初始頁數第一頁
     const [ nowPage, setNowPage] = useState(1)
+
+    // 細節頁資訊
+    const [ detailInfo, setDetailInfo]= useState([])
     
     // 生成頁數陣列(只做一次), 總頁數在上層被更新後再去生成頁碼
     // const PageAr=[]
@@ -47,19 +51,22 @@ const Cmoney = (props) => {
         // 不同頁數的呈現資料
         let newData =userData.slice((nowPage-1)*20,(nowPage*20))
         setDisplayUser(newData)
-        console.log('還沒判斷',PageAr)
+        // console.log('還沒判斷',PageAr)
+
         // 如果現在的頁數>3的時候，控制頁數
         if(nowPage>3 && nowPage<totalpage-1){
-            console.log('頁碼>3')
+            // console.log('頁碼>3')
             const showPage = PageAr.slice((nowPage-3),(nowPage+2))
-            console.log(PageAr)
+            // console.log(PageAr)
             setPagination(showPage)
-            console.log('大於三的頁碼',showPage)
+            // console.log('大於三的頁碼',showPage)
         }else{
-            console.log('元陣列變化',PageAr)
-            const showPage = PageAr.slice(nowPage-1, nowPage+4)
-            console.log('show',showPage)
-            // setPagination(showPage)
+            console.log('陣列變化',PageAr)
+            console.log(nowPage)
+            // const showPage = PageAr.slice(nowPage-1, nowPage+4)
+            const showPage = [1,2,3,4,5]
+            // console.log('呈現的頁數',showPage)
+            setPagination(showPage)
         }
     }, [nowPage,userData]);
 
@@ -70,13 +77,19 @@ const Cmoney = (props) => {
         <div className="userwrap">
         {displayUser.map((v,i)=>{
             return(
+            <div class="user"
+                onClick={()=>{
+                    // 設定細節頁資訊
+                    setDetailInfo(v)
+                }}>
             <Usercard
                 avatar={v.picture.large}
                 name={v.name.first+' '+v.name.last}
                 country={v.location.country}
                 city={v.location.city}
                 gender={v.gender}
-            />)
+            />
+            </div>)
         })}
         </div>
         <div className="pagewrap">
@@ -88,7 +101,10 @@ const Cmoney = (props) => {
             />
         </div>
     </div>
-    
+    {/* 細節頁 */}
+    <Userdetail
+        detailInfo={detailInfo}
+    />    
     </>
     );
 };
