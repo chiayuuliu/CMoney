@@ -15,12 +15,21 @@ const Cmoney = (props) => {
     const [ nowPage, setNowPage] = useState(1)
     
     // 生成頁數陣列(只做一次), 總頁數在上層被更新後再去生成頁碼
-    useEffect(() => {
-        // 第一次進來生成頁碼陣列
+    // const PageAr=[]
+    function page(totalpage) {
+        console.log('生成頁碼陣列')
         for (let i = 1 ; i<=totalpage ; i++){
             PageAr.push(i)
         }
         setPageAr(PageAr)
+    }
+    useEffect(() => {
+        // 第一次進來生成頁碼陣列
+        page(totalpage)
+        // for (let i = 1 ; i<=totalpage ; i++){
+        //     PageAr.push(i)
+        // }
+        // setPageAr(PageAr)
         // 如果大於五頁做頁碼呈現控制
         if(PageAr.length>5){
             // 取五頁就好
@@ -31,24 +40,27 @@ const Cmoney = (props) => {
             setPagination(PageAr)
         }
     }, [totalpage]);
-    // console.log(PageAr)
+
 
     // 目前頁數有變化的時候，去修改顯示的資料&調整頁碼的呈現
     useEffect(() => {
         // 不同頁數的呈現資料
         let newData =userData.slice((nowPage-1)*20,(nowPage*20))
         setDisplayUser(newData)
-
+        console.log('還沒判斷',PageAr)
         // 如果現在的頁數>3的時候，控制頁數
         if(nowPage>3 && nowPage<totalpage-1){
             console.log('頁碼>3')
             const showPage = PageAr.slice((nowPage-3),(nowPage+2))
+            console.log(PageAr)
             setPagination(showPage)
+            console.log('大於三的頁碼',showPage)
         }else{
-            
+            console.log('元陣列變化',PageAr)
+            const showPage = PageAr.slice(nowPage-1, nowPage+4)
+            console.log('show',showPage)
+            // setPagination(showPage)
         }
-
-
     }, [nowPage,userData]);
 
     return (
@@ -72,6 +84,7 @@ const Cmoney = (props) => {
                 pagination={pagination}
                 nowPage={nowPage}
                 setNowPage={setNowPage}
+                totalpage={totalpage}
             />
         </div>
     </div>

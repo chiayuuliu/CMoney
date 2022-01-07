@@ -86,7 +86,6 @@ nav{
   font-size: 20px;
   color: white;
   text-align: center;
-  /* line-height: 30px !important; */
 }
 .maleicon{
   background-color: rgba(137, 192, 241, 0.8) ;
@@ -222,7 +221,9 @@ nav{
   align-items: center;
   margin: 50px auto;
 }
-.pagewrap div{
+.pagewrap .page,
+.next-page,
+.pre-page{
   margin: 0px 10px;
   width: 30px;
   height: 30px;
@@ -241,9 +242,14 @@ nav{
 .nowpage{
   /* 目前頁數的反饋 */
   background-color: rgba(75, 148, 194, 0.688);
-  color: white;
+  color: white !important;
 }
 .pagewrap{
   text-decoration: none;
   color: rgb(75, 149, 194);
+}
+
+/* 前後頁失效效果 */
+.pageDisable{
+  color: lightgray ;
 }
