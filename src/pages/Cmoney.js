@@ -5,7 +5,8 @@ import Pagination from './../components/Pagination';
 import Userdetail from './../components/Userdetail';
 
 const Cmoney = (props) => {
-    const {userData, totalpage} = props
+    // 全部user、總頁數從頂層來
+    const {userData, totalpage,detailInfo,setDetailInfo} = props
     // 儲存全部的頁數陣列
     const [PageAr, setPageAr] = useState([])
     // 呈現的頁數
@@ -14,31 +15,25 @@ const Cmoney = (props) => {
     const [ displayUser, setDisplayUser] = useState([])
     // 設定初始頁數第一頁
     const [ nowPage, setNowPage] = useState(1)
+    // 細節頁開關，預設是不顯示
+    const [ detailDisplay, setDetailDisplay] = useState(false)
 
-    // 細節頁資訊
-    const [ detailInfo, setDetailInfo]= useState([])
-    
+
     // 生成頁數陣列(只做一次), 總頁數在上層被更新後再去生成頁碼
-    // const PageAr=[]
     function page(totalpage) {
-        console.log('生成頁碼陣列')
         for (let i = 1 ; i<=totalpage ; i++){
             PageAr.push(i)
         }
         setPageAr(PageAr)
     }
+
+    
     useEffect(() => {
         // 第一次進來生成頁碼陣列
         page(totalpage)
-        // for (let i = 1 ; i<=totalpage ; i++){
-        //     PageAr.push(i)
-        // }
-        // setPageAr(PageAr)
-        // 如果大於五頁做頁碼呈現控制
         if(PageAr.length>5){
             // 取五頁就好
             let showPage = PageAr.slice(nowPage-1, nowPage+4)
-            // console.log(showPage)
             setPagination(showPage)
         }else{
             setPagination(PageAr)
@@ -51,21 +46,13 @@ const Cmoney = (props) => {
         // 不同頁數的呈現資料
         let newData =userData.slice((nowPage-1)*20,(nowPage*20))
         setDisplayUser(newData)
-        // console.log('還沒判斷',PageAr)
 
         // 如果現在的頁數>3的時候，控制頁數
         if(nowPage>3 && nowPage<totalpage-1){
-            // console.log('頁碼>3')
             const showPage = PageAr.slice((nowPage-3),(nowPage+2))
-            // console.log(PageAr)
             setPagination(showPage)
-            // console.log('大於三的頁碼',showPage)
         }else{
-            console.log('陣列變化',PageAr)
-            console.log(nowPage)
-            // const showPage = PageAr.slice(nowPage-1, nowPage+4)
             const showPage = [1,2,3,4,5]
-            // console.log('呈現的頁數',showPage)
             setPagination(showPage)
         }
     }, [nowPage,userData]);

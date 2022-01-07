@@ -16,6 +16,9 @@ function App() {
   const [totalpage, setTotalpage] = useState(8)
   const [ pageAr, setPageAr] = useState([]);
 
+  // 細節頁資訊
+  const [ detailInfo, setDetailInfo]= useState([])
+
   function page(totalpage) {
     const pagination = []
     let i =1
@@ -36,6 +39,7 @@ function App() {
         // 設定資料跟總頁數
         setUserData(user)
         setTotalpage(Math.ceil(user.length/20))
+        setDetailInfo(user[0])
     })
 }, []);
 
@@ -64,6 +68,8 @@ function App() {
           <Cmoney
             userData={userData}
             totalpage={totalpage}
+            detailInfo={detailInfo}
+            setDetailInfo={setDetailInfo}
           />
         </Route>        
       </Switch>
