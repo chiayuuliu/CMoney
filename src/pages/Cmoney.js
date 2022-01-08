@@ -8,7 +8,7 @@ const Cmoney = (props) => {
     // 全部user、總頁數從頂層來
     const {userData, totalpage,detailInfo,setDetailInfo} = props
     // 儲存全部的頁數陣列
-    const [PageAr, setPageAr] = useState([])
+    // const [PageAr, setPageAr] = useState([])
     // 呈現的頁數
     const [ pagination, setPagination] = useState([])
     // 顯示的會員資料
@@ -69,6 +69,7 @@ const Cmoney = (props) => {
                 onClick={()=>{
                     // 設定細節頁資訊
                     setDetailInfo(v)
+                    setDetailDisplay(true)
                 }}>
             <Usercard
                 avatar={v.picture.large}
@@ -76,22 +77,27 @@ const Cmoney = (props) => {
                 country={v.location.country}
                 city={v.location.city}
                 gender={v.gender}
+                
             />
             </div>)
         })}
         </div>
-        <div className="pagewrap">
+        <div className="pagewrap"
+        >
             <Pagination
                 pagination={pagination}
                 nowPage={nowPage}
                 setNowPage={setNowPage}
                 totalpage={totalpage}
+                
             />
         </div>
     </div>
     {/* 細節頁 */}
     <Userdetail
         detailInfo={detailInfo}
+        detailDisplay={detailDisplay}
+        setDetailDisplay={setDetailDisplay}
     />    
     </>
     );

@@ -2,10 +2,10 @@ import React,{ useState, useEffect }  from 'react';
 import { Link } from 'react-router-dom'
 
 const Userdetail = (props) => {
-    const {detailInfo} = props
-    const [name, setName] = useState('');
+    const {detailInfo, detailDisplay, setDetailDisplay} = props
+    // const [name, setName] = useState('');
     // console.log('detail',detailInfo.name)
-    // 判斷性別
+    
     useEffect(() => {
         // console.log(detailInfo.name.first)
         // console.log('detailpage',detailInfo)
@@ -13,9 +13,12 @@ const Userdetail = (props) => {
     }, [detailInfo]);
     return (
     <>
-    <div class="dt-back">
+    <div class="dt-back"
+        style={{display:detailDisplay ? 'flex' : 'none'}}
+        onClick={(e)=>{
+            setDetailDisplay(false)
+        }}>
         <div class="dt-wrap">
-            {/* 上半部資訊 */}
             <div class="dt-card">
                 <div class="dt-avatar">
                     {/* <img src={detailInfo.picture.large} alt=""/> */}
