@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom'
 import Pagination from './../components/Pagination';
 
 const Admin = (props) => {
-    const {userData} = props
-    // console.log('userData',userData)
-
+    const {userData, countryList} = props
     const [ nowPage, setNowPage] = useState(1)
+    // displayData
     const [ userList, setuserList] = useState([]);
-
+    const [ totalpage, setTotalpage] = useState()
 
     useEffect(() => {
+      setTotalpage(Math.ceil(userData.length/10))
+      console.log(totalpage);
       let newData =userData.slice((nowPage-1)*10,(nowPage*10))
       setuserList(newData)
-      console.log(userData)
-    }, [userData]);
 
+    }, [userData]);
 
 
     return (
@@ -26,10 +26,18 @@ const Admin = (props) => {
         <div class="memberfilter">
             <div class="filter">
                 <select name="filter" id="country">
-                    <option value="">全部國家</option>
+                    <option value="All">全部國家</option>
+                    {countryList.map((v,i)=>{
+                      return(
+                        <option value={v}
+                        key={i}>{v}</option>
+                      )
+                    })}
                 </select>
                 <select name="filter" id="gender">
-                    <option value="">全部性別</option>
+                    <option value="All">全部性別</option>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
                 </select>
             </div>
             <div class="filterResult">
@@ -72,7 +80,7 @@ const Admin = (props) => {
     </div>
     <div class="pagewrap">
       {/* <Pagination
-        nowPage={nowPage}           
+
       /> */}
     </div>
     </>

@@ -326,6 +326,10 @@ nav{
   padding: 0 10px;
   background-color: rgb(238, 238, 238);
   margin-right: 10px;
+  cursor: pointer;
+}
+.filter select:focus{
+  outline: none;
 }
 .filterResult{
   display: flex;
@@ -382,4 +386,10 @@ td button{
 tbody tr{
   padding: 5px 0px;
   box-sizing: border-box;
+}
+.table tbody{
+  vertical-align: middle !important;
+}
+tbody tr:hover{
+  background-color: rgb(253, 244, 214);
 }

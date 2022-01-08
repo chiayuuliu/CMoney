@@ -16,6 +16,7 @@ function App() {
   const [totalpage, setTotalpage] = useState(Math.ceil(userData.length/20))
   // 細節頁資訊
   const [ detailInfo, setDetailInfo]= useState([])
+  const [ countryList, setCountryList] = useState([])
 
 
   // 拿全部資料
@@ -25,13 +26,24 @@ function App() {
     .then(data=>{
         let user = data.results;
         setDetailInfo(user[0])
-        console.log('app.js detail',detailInfo)
+        // console.log('app.js detail',detailInfo)
         // 設定資料跟總頁數
         setUserData(user)
         setTotalpage(Math.ceil(user.length/20))
+      
     })
 }, []);
 
+// 設定資料後生國家list往下傳
+useEffect(() => {
+  const countryAr=[]
+  for(let i=0;i<userData.length;i++){
+    if(!countryAr.includes(userData[i].location.country)){
+      countryAr.push(userData[i].location.country)
+    }
+  }
+  setCountryList(countryAr)
+}, [userData]);
 
   // 判斷是否在登入頁面
   let login = window.location.pathname
@@ -48,6 +60,7 @@ function App() {
         <Route path="/admin">
           <Admin
             userData={userData}
+            countryList={countryList}
           />
         </Route>
         {/* 登入頁 */}
