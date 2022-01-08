@@ -14,32 +14,23 @@ function App() {
 
   const [ userData, setUserData] = useState([])
   const [totalpage, setTotalpage] = useState(8)
-  const [ pageAr, setPageAr] = useState([]);
+  // const [ pageAr, setPageAr] = useState([]);
 
   // 細節頁資訊
   const [ detailInfo, setDetailInfo]= useState([])
 
-  function page(totalpage) {
-    const pagination = []
-    let i =1
-    for (let i = 1 ; i<=totalpage ; i++){
-      pagination.push(i)
-    }
-    if(i=totalpage){
-      setPageAr(pagination)
-      console.log(pageAr)
-    }
-  }
+
   // 拿全部資料
   useEffect(() => {        
     fetch('https://randomuser.me/api/?results=150')
     .then(r=>r.json())
     .then(data=>{
         let user = data.results;
+        setDetailInfo(user[0])
+        console.log('app.js detail',detailInfo)
         // 設定資料跟總頁數
         setUserData(user)
         setTotalpage(Math.ceil(user.length/20))
-        setDetailInfo(user[0])
     })
 }, []);
 

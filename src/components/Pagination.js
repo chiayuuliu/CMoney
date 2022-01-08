@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 const Pagination = (props) => {
     // 頁數陣列、設定頁數狀態
     const {pagination,nowPage, setNowPage, totalpage} = props
-        
-    
+   
+    // console.log(nowPage,pagination)
     return (
     <>
     {/* 前一頁 */}

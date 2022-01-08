@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 
 const Userdetail = (props) => {
     const {detailInfo} = props
+    const [name, setName] = useState('');
     // console.log('detail',detailInfo.name)
     // 判斷性別
     useEffect(() => {
         // console.log(detailInfo.name.first)
-        console.log('detailpage',detailInfo)
+        // console.log('detailpage',detailInfo)
+        // setName(detailInfo.name.first)
     }, [detailInfo]);
     return (
     <>
@@ -16,11 +18,14 @@ const Userdetail = (props) => {
             {/* 上半部資訊 */}
             <div class="dt-card">
                 <div class="dt-avatar">
-                    {/* <img src={detailInfo.picture.medium} alt=""/> */}
+                    {/* <img src={detailInfo.picture.large} alt=""/> */}
                 </div>
                 <div class="dt-info">
-                    {/* <p>{detailInfo.name.first+ ' ' + detailInfo.name.last}</p>
-                    <p>{detailInfo.gender}</p>
+                {/* {console.log('name',name)} */}
+                    {/* <p>{name}</p> */}
+
+                    {/* <p>{detailInfo.name.first+ ' ' + detailInfo.name.last}</p> */}
+                    {/* <p>{detailInfo.gender}</p>
                     <p>{detailInfo.email}</p>
                     <p>{detailInfo.phone}</p> */}
                     <p>dis</p>
