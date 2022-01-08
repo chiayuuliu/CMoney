@@ -18,44 +18,46 @@ const Cmoney = (props) => {
     // 細節頁開關，預設是不顯示
     const [ detailDisplay, setDetailDisplay] = useState(false)
 
-    
-    useEffect(() => {
-        // 第一次進來生成頁碼陣列
-        const showPage=[]
-        if(totalpage>5 ){
-            for(let i = nowPage; i <=nowPage+4; i++){
-                showPage.push(i)
-            }
-            console.log(showPage)
-            setPagination(showPage)
-        }else{
-            for(let i = 1; i <=5; i++){
-                showPage.push(i)
-            }
-            console.log(showPage)
-            setPagination(showPage)
-        }       
-    }, []);
+    // 關閉細節頁
+    window.addEventListener('keydown',(e)=>{
+        if(e.key=='Escape'){
+            setDetailDisplay(false)
+        }
+    })
+    // useEffect(() => {
+    //     // 第一次進來生成頁碼陣列
+    //     const showPage=[]
+    //     if(totalpage>5 ){
+    //         for(let i = nowPage; i <=nowPage+4; i++){
+    //             showPage.push(i)
+    //         }
+    //         console.log(showPage)
+    //         setPagination(showPage)
+    //     }else{
+    //         for(let i = 1; i <=5; i++){
+    //             showPage.push(i)
+    //         }
+    //         console.log(showPage)
+    //         setPagination(showPage)
+    //     }       
+    // }, []);
 
     // 目前頁數有變化的時候，去修改顯示的資料&調整頁碼的呈現
     useEffect(() => {
-        // 不同頁數的呈現資料
         let newData =userData.slice((nowPage-1)*20,(nowPage*20))
         setDisplayUser(newData)
 
-        // 如果現在的頁數>3的時候，控制頁數
-        // >3 <7
-        if(nowPage>3 && nowPage<totalpage-1){
-            const showPage=[]
-            for(let i = nowPage-2;i<=nowPage+2; i++){
-                showPage.push(i)
-            }
-            setPagination(showPage)
-        }
-        if(nowPage<=3){
-            const showPage = [1,2,3,4,5]
-            setPagination(showPage)
-        }
+        // if(nowPage>3 && nowPage<totalpage-1){
+        //     const showPage=[]
+        //     for(let i = nowPage-2;i<=nowPage+2; i++){
+        //         showPage.push(i)
+        //     }
+        //     setPagination(showPage)
+        // }
+        // if(nowPage<=3){
+        //     const showPage = [1,2,3,4,5]
+        //     setPagination(showPage)
+        // }
     }, [nowPage,userData]);
 
     return (
@@ -86,6 +88,7 @@ const Cmoney = (props) => {
         >
             <Pagination
                 pagination={pagination}
+                setPagination={setPagination}
                 nowPage={nowPage}
                 setNowPage={setNowPage}
                 totalpage={totalpage}

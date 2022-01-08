@@ -3,9 +3,41 @@ import { Link } from 'react-router-dom'
 
 const Pagination = (props) => {
     // 頁數陣列、設定頁數狀態
-    const {pagination,nowPage, setNowPage, totalpage} = props
+    const {pagination,setPagination,nowPage, setNowPage, totalpage} = props
    
+    useEffect(() => {
+        // 第一次進來生成頁碼陣列
+        const showPage=[]
+        if(totalpage>5 ){
+            for(let i = nowPage; i <=nowPage+4; i++){
+                showPage.push(i)
+            }
+            // console.log(showPage)
+            setPagination(showPage)
+        }else{
+            for(let i = 1; i <=totalpage; i++){
+                showPage.push(i)
+            }
+            // console.log(showPage)
+            setPagination(showPage)
+        }       
+    }, []);
+    useEffect(() => {
+        if(nowPage>3 && nowPage<totalpage-1){
+            const showPage=[]
+            for(let i = nowPage-2;i<=nowPage+2; i++){
+                showPage.push(i)
+            }
+            setPagination(showPage)
+        }
+        if(nowPage<=3){
+            const showPage = [1,2,3,4,5]
+            setPagination(showPage)
+        }
+    }, [nowPage]);
+    
     // console.log(nowPage,pagination)
+
     return (
     <>
     {/* 前一頁 */}

@@ -13,9 +13,7 @@ import Admin from './pages/Admin';
 function App() {
 
   const [ userData, setUserData] = useState([])
-  const [totalpage, setTotalpage] = useState(8)
-  // const [ pageAr, setPageAr] = useState([]);
-
+  const [totalpage, setTotalpage] = useState(Math.ceil(userData.length/20))
   // 細節頁資訊
   const [ detailInfo, setDetailInfo]= useState([])
 
@@ -48,7 +46,9 @@ function App() {
         </Route>
         {/* 會員列表 */}
         <Route path="/admin">
-          <Admin/>
+          <Admin
+            userData={userData}
+          />
         </Route>
         {/* 登入頁 */}
         <Route path="/login">

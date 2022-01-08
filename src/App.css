@@ -289,3 +289,97 @@ nav{
   height: 70%;
   background-color: wheat;
 }
+
+/* 會員列表 */
+
+/* .memberwrap{
+  padding-top: 100px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px auto;
+} */
+
+.memberwrap {
+  padding-top: 60px;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  letter-spacing: 3px;
+  font-size: 28px;
+  width: 300px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.filter select{
+  width: 120px;
+  height: 40px;
+  border: none;
+  box-sizing: border-box;
+  padding: 0 10px;
+  background-color: rgb(238, 238, 238);
+  margin-right: 10px;
+}
+.filterResult{
+  display: flex;
+  justify-content: space-between;
+}
+.filterResult p{
+  margin: 0 10px;
+  line-height: 40px;
+}
+
+.memberfilter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.table img{
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+table{
+  margin-top: 50px;
+}
+/* cellspacing="0" */
+table {
+  border-collapse:collapse;
+}
+
+thead {
+  /* visibility: hidden; */
+  /* display: none; */
+  background-color: wheat;
+  border-bottom: 2px solid rgb(131, 131, 132);
+}
+th{
+  box-sizing: border-box;
+  padding: 10px 0px;
+  text-align: center;
+}
+td{
+  text-align: center;
+  /* background-color: turquoise; */
+}
+td button{
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: rgb(203, 68, 74);
+  color: white;
+  font-weight: 400;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+tbody tr{
+  padding: 5px 0px;
+  box-sizing: border-box;
+}

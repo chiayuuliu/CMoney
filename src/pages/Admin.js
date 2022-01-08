@@ -1,9 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Pagination from './../components/Pagination';
 
 const Admin = (props) => {
-    const {userdata} = props
-    console.log('userdata',userdata)
+    const {userData} = props
+    // console.log('userData',userData)
+
+    const [ nowPage, setNowPage] = useState(1)
+    const [ userList, setuserList] = useState([]);
+
+
+    useEffect(() => {
+      let newData =userData.slice((nowPage-1)*10,(nowPage*10))
+      setuserList(newData)
+      console.log(userData)
+    }, [userData]);
+
+
 
     return (
     <>
@@ -19,7 +32,8 @@ const Admin = (props) => {
                     <option value="">全部性別</option>
                 </select>
             </div>
-            <div class="filterresult">
+            <div class="filterResult">
+                <p>篩選結果</p>
                 <p>共150人</p>
             </div>
         </div>
@@ -38,21 +52,28 @@ const Admin = (props) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
+            {userList.map((v,i)=>{
+              return(
+                <tr>
                 <td><input type="checkbox"/></td>
-                <td><img src="./img/avatar.png" alt=""/></td>
-                <td>帳號</td>
-                <td>劉家佑</td>
-                <td>女</td>
-                <td>28</td>
-                <td>台灣</td>
-                <td>chiayuu.liu@gmail.com</td>
+                <td><img src={v.picture.large} alt=""/></td>
+                <td>{v.login.username}</td>
+                <td>{v.name.first+' '+v.name.last}</td>
+                <td>{v.gender}</td>
+                <td>{v.dob.age}</td>
+                <td>{v.location.country}</td>
+                <td>{v.email}</td>
                 <td><button>編輯</button></td>
               </tr>
+              )
+            })}
             </tbody>
           </table>
     </div>
     <div class="pagewrap">
+      {/* <Pagination
+        nowPage={nowPage}           
+      /> */}
     </div>
     </>
     );
