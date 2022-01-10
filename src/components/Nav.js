@@ -1,22 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter , useHistory} from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
-const Nav = () => {
+function Nav(props) {
+    let history = useHistory()
+
+    const { login,setLogin } = props
+
+    const handlingLogout = (e) => {
+        props.history.push('/')
+      }
+
+    const handlingLogin = (e) => {
+        props.history.push('/login')
+    }
+    console.log('login',login);
     return (
     <>
-    <nav>
+    {/* <nav style={{display: login ? 'block' : 'none' }}> */}
+    <div className='nav'
+        // style={{display: login ? 'block' : 'none' }}
+        >
         <div className="logo">
-            <img src="http://localhost:3000/logo.png" alt/>
+            <Link to="/"><img src="http://localhost:3000/logo.png" alt/></Link>
         </div>
         <div className="navlink">
-            <a href="">首頁</a>
-            <a href="">會員列表</a>
-            <a href="">自選清單</a>
+            <Link to="/">首頁</Link>
+            <Link to="/admin">會員列表</Link>
+            <Link to="/customer">自選清單</Link>
         </div>
-        <button className="loginbtn">登出</button>
-    </nav>
+        <button className="loginbtn" 
+            onClick={()=>{
+                setLogin(false)
+                handlingLogout()
+            }}
+            style={{display: login ? 'block' : 'none' }}
+            >登出</button>
+
+            <button className="loginbtn" 
+            onClick={()=>{
+                setLogin(true)
+                handlingLogin()
+            }}
+            style={{display: login ? 'none' : 'block' }}
+            >登入</button>
+    </div>
     </>
     );
 };
 
-export default Nav;
+export default withRouter(Nav);

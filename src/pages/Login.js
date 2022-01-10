@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react'
+import { withRouter , useHistory} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 const Login = (props) => {
-    
+    const {setLogin} = props
     const [emailInput, setEmailInput] = useState('')
     const [pwdInput, setpwdInput] = useState('')
-
+    let history = useHistory()
     const account = 'lucy.gutierrez@example.com'
     const pwd = 'passion'
-    
+    console.log(document.cookie)
     // 判斷是否有登入成功
+
     const isPassed =(pwdInput,emailInput)=>{
         const passAlert = document.querySelector('.login-success')
         const failAlert = document.querySelector('.login-fail')
         
         if(emailInput==account && pwdInput==pwd){
-            passAlert.style.display='block'    
+            passAlert.style.display='block' 
+            setLogin(true)
+            console.log('登入成功')
+            props.history.push('/')  
+
         }else{
             failAlert.style.display='block'
         }
@@ -26,8 +32,8 @@ const Login = (props) => {
         }, 3000);
     }
     return (
-    <><div className="login-background">
-        
+    <>
+        <div className="login-background">
             <div className="infowrap">
                 <p>帳號：lucy.gutierrez@example.com</p>
                 <p>密碼：passion</p>
@@ -47,6 +53,7 @@ const Login = (props) => {
                         type="email" 
                         placeholder="電子郵件"
                         value={emailInput}
+                        required
                         onChange={(e)=>{
                             setEmailInput(e.target.value)
                         }}
@@ -55,13 +62,13 @@ const Login = (props) => {
                         type="password" 
                         placeholder="密碼"
                         value={pwdInput}
+                        required
                         onChange={(e)=>{
                             setpwdInput(e.target.value)
                         }}
                         />
                     </div>
                     <div className="btn-wrap">
-                        
                         <button type="submit"
                         onClick={(e)=>{
                             e.preventDefault()
@@ -72,8 +79,6 @@ const Login = (props) => {
                                 // **這邊要加警示語  
                             }
                         }}>送出</button>
-
-
                         <button type="submit"
                         onClick={(e)=>{
                             e.preventDefault()
@@ -90,4 +95,4 @@ const Login = (props) => {
     </>
     );
 };
-export default Login;
+export default withRouter(Login);

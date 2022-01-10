@@ -36,8 +36,6 @@ const Pagination = (props) => {
         }
     }, [nowPage]);
     
-    // console.log(nowPage,pagination)
-
     return (
     <>
     {/* 前一頁 */}
