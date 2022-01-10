@@ -7,8 +7,13 @@ const Login = (props) => {
     const [emailInput, setEmailInput] = useState('')
     const [pwdInput, setpwdInput] = useState('')
     let history = useHistory()
-    const account = 'lucy.gutierrez@example.com'
-    const pwd = 'passion'
+    // const account = 'lucy.gutierrez@example.com'
+    // const pwd = 'passion'
+
+    // 測試用
+    const account = 'a'
+    const pwd = 'a'
+
     console.log(document.cookie)
     // 判斷是否有登入成功
 

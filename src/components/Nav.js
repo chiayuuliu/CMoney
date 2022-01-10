@@ -19,7 +19,7 @@ function Nav(props) {
     <>
     {/* <nav style={{display: login ? 'block' : 'none' }}> */}
     <div className='nav'
-        // style={{display: login ? 'block' : 'none' }}
+        style={{display: login ? 'flex' : 'none' }}
         >
         <div className="logo">
             <Link to="/"><img src="http://localhost:3000/logo.png" alt/></Link>
@@ -31,19 +31,36 @@ function Nav(props) {
         </div>
         <button className="loginbtn" 
             onClick={()=>{
-                setLogin(false)
                 handlingLogout()
+                setLogin(false)
             }}
             style={{display: login ? 'block' : 'none' }}
             >登出</button>
 
-            <button className="loginbtn" 
+            {/* <button className="loginbtn" 
             onClick={()=>{
                 setLogin(true)
                 handlingLogin()
             }}
             style={{display: login ? 'none' : 'block' }}
-            >登入</button>
+            >登入</button> */}
+    </div>
+
+
+    <div className='nav'
+        style={{display: login ? 'none' : 'flex' }}
+        >
+        <div className="logo">
+            <Link to="/"><img src="http://localhost:3000/logo.png" alt/></Link>
+        </div>
+
+        <button className="loginbtn" 
+        onClick={()=>{
+            // setLogin(true)
+            handlingLogin()
+        }}
+        style={{display: login ? 'none' : 'block' }}
+        >登入</button>
     </div>
     </>
     );

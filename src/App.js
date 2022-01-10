@@ -93,9 +93,10 @@ useEffect(() => {
         </Route>
 
         {/* 登入頁 */}
-        <Route path="/login"
-          setLogin={setLogin}>
-          <Login/>
+        <Route path="/login">
+          <Login
+            setLogin={setLogin}
+          />
         </Route>
 
         {/* 首頁(圖表) */}
