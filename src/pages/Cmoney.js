@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Usercard from './../components/Usercard';
 import Pagination from './../components/Pagination';
 import Userdetail from './../components/Userdetail';
+import Spinner from './../components/Spinner'
 
 const Cmoney = (props) => {
     // 全部user、總頁數從頂層來
@@ -21,6 +22,8 @@ const Cmoney = (props) => {
     // 判斷是否登入
     const [ login, setLogin] = useState('登入');
 
+    // 一開始spinner 設定關閉
+    let [ loading, setLoading] = useState(false)
     // 關閉細節頁
     window.addEventListener('keydown',(e)=>{
         if(e.key=='Escape'){
@@ -57,14 +60,23 @@ const Cmoney = (props) => {
 
     // 目前頁數有變化的時候，去修改顯示的資料&調整頁碼的呈現
     useEffect(() => {
+        setLoading(true)
         let newData =userData.slice((nowPage-1)*20,(nowPage*20))
         setDisplayUser(newData)
         setDetailInfo(userData[0])
+        setTimeout(() => {
+            setLoading(false)
+          }, 2000)
     }, [nowPage,userData]);
 
     return (
     <>
-    <div className="wrap">
+    <Spinner
+        loading={loading}
+    />
+    
+    <div className="wrap"
+    style={{display: loading ? 'none' : 'flex' }}>
         <h2>前端開發人力仲介</h2>
         <div className="userwrap">
         {displayUser.map((v,i)=>{

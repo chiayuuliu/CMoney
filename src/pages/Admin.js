@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from './../components/Pagination';
+import Spinner from './../components/Spinner'
+
 
 const Admin = (props) => {
     const {userData, countryList,checkedUser, setCheckedUser} = props
@@ -22,12 +24,23 @@ const Admin = (props) => {
     const [ filterData, setFilterData] = useState([])
 
     const [pagination, setPagination] = useState([])
+    // spinner 開關 
+    let [ loading, setLoading] = useState(false)
+
     useEffect(() => {
+      setLoading(true)
+
       setFilterData(userData)
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 2000)
+
     }, [userData]);
 
     useEffect(() => {
       handleDisplayList(nowPage,filterData)
+
     }, [filterData,nowPage]);
 
     // 處理陳列的資料，頁數變動、篩選、都要從新設定
@@ -139,7 +152,11 @@ const Admin = (props) => {
 
     return (
     <>
-    <div class="memberwrap">
+    <Spinner
+        loading={loading}
+    />
+    <div class="memberwrap"
+    style={{display: loading ? 'none' : 'flex' }}>
         <h2 class="title">會員列表</h2>
         {/* 篩選區 */}
         <div class="memberfilter">
@@ -221,6 +238,7 @@ const Admin = (props) => {
             })}
             </tbody>
           </table>
+        {/* 頁數 */}
         <div class="pagewrap">
           <div class="pre-page"
 
