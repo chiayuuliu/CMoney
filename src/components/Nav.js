@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, withRouter , useHistory} from 'react-router-dom'
-// import { Link } from 'react-router-dom'
 
 function Nav(props) {
     let history = useHistory()
@@ -17,7 +16,6 @@ function Nav(props) {
     console.log('login',login);
     return (
     <>
-    {/* <nav style={{display: login ? 'block' : 'none' }}> */}
     <div className='nav'
         style={{display: login ? 'flex' : 'none' }}
         >
@@ -36,14 +34,6 @@ function Nav(props) {
             }}
             style={{display: login ? 'block' : 'none' }}
             >登出</button>
-
-            {/* <button className="loginbtn" 
-            onClick={()=>{
-                setLogin(true)
-                handlingLogin()
-            }}
-            style={{display: login ? 'none' : 'block' }}
-            >登入</button> */}
     </div>
 
 

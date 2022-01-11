@@ -60,14 +60,20 @@ const Cmoney = (props) => {
 
     // 目前頁數有變化的時候，去修改顯示的資料&調整頁碼的呈現
     useEffect(() => {
-        setLoading(true)
+        
         let newData =userData.slice((nowPage-1)*20,(nowPage*20))
         setDisplayUser(newData)
         setDetailInfo(userData[0])
-        setTimeout(() => {
-            setLoading(false)
-          }, 2000)
+        
     }, [nowPage,userData]);
+
+    // 只下第一次spinner
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+                setLoading(false)
+            }, 2000)
+    }, []);
 
     return (
     <>

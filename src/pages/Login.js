@@ -7,6 +7,7 @@ const Login = (props) => {
     const [emailInput, setEmailInput] = useState('')
     const [pwdInput, setpwdInput] = useState('')
     let history = useHistory()
+    // 正式帳密
     // const account = 'lucy.gutierrez@example.com'
     // const pwd = 'passion'
 
