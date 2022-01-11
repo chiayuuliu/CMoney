@@ -1,127 +1,82 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Pagination from './../components/Pagination';
-import Spinner from './../components/Spinner'
+import Pagination from '../components/Pagination';
+import Spinner from '../components/Spinner'
 
 
 const Admin = (props) => {
-    const {userData, countryList,checkedUser, setCheckedUser} = props
-    const [ nowPage, setNowPage] = useState(1)
-    // 展示的資料
-    const [ userList, setuserList] = useState([]);
-    // 打勾的數量
-    // const [ checkedQty, setcheckedQty] = useState();
-    const [ totalpage, setTotalpage] = useState(0)
-    const [ selectCountry, setSelectCountry] = useState('All')
-    const [ selectGender, setSelectGender] = useState('All')
-    // 如果只有一頁，不顯示前後頁icon
-    const [ onepage, setOnepage] =useState(false)
-    // 篩選資料筆數結果
-    const [ filterQty, setFilterQty] = useState(0);
-    // 篩選結果顯示
-    const [filter, setFilter] = useState(false);
-    // 篩選後的資料
-    const [ filterData, setFilterData] = useState([])
-    const [pagination, setPagination] = useState([])
+    
     // spinner 開關 
     let [ loading, setLoading] = useState(false)
 
 
-    useEffect(() => {
-      // spinner 設定
-      setLoading(true)
-      setFilterData(userData)
-      setTimeout(() => {
-        setLoading(false)
-      }, 2000)
+    // useEffect(() => {
+    //   // spinner 設定
+    //   setLoading(true)
+    //   setFilterData(userData)
+    //   setTimeout(() => {
+    //     setLoading(false)
+    //   }, 2000)
 
-    }, [userData]);
+    // }, [userData]);
 
-    useEffect(() => {
-      handleDisplayList(nowPage,filterData)
-
-    }, [filterData,nowPage]);
-
-    // 處理陳列的資料，頁數變動、篩選、都要從新設定
-    const handleDisplayList =(nowPage, data)=>{
-      setTotalpage(Math.ceil(data.length/10))
-      // 展示的資料
-      let displayData = data.slice((nowPage-1)*10,(nowPage*10))
-      setuserList(displayData)
-    }
-
-    // 生成總頁數
-    useEffect(() => {
-      let showPage=[]
-      if(totalpage>5){
-        for(let i = nowPage; i <=nowPage+4; i++){
-          showPage.push(i)
-        }
-      }else{
-        for(let i = 1; i <=totalpage; i++){
-          showPage.push(i)
-        }
-      }
-      setPagination(showPage)
-
-    }, [totalpage]);
+    
 
     // 頁數大於三的處理
-    useEffect(() => {
-      const showPage=[]
-      if(nowPage>3 && nowPage<totalpage-1){
-          for(let i = nowPage-2;i<=nowPage+2; i++){
-              showPage.push(i)
-          }
-          setPagination(showPage)
-      }
-      if(nowPage<=3){
-        if(totalpage>=5){
-          const showPage = [1,2,3,4,5]
-          setPagination(showPage)
-        }else{
-          for(let i = 1; i <=totalpage; i++){
-            showPage.push(i)
-            setPagination(showPage)
-          }
-        }
-      }
-  }, [nowPage]);
+  //   useEffect(() => {
+  //     const showPage=[]
+  //     if(nowPage>3 && nowPage<totalpage-1){
+  //         for(let i = nowPage-2;i<=nowPage+2; i++){
+  //             showPage.push(i)
+  //         }
+  //         setPagination(showPage)
+  //     }
+  //     if(nowPage<=3){
+  //       if(totalpage>=5){
+  //         const showPage = [1,2,3,4,5]
+  //         setPagination(showPage)
+  //       }else{
+  //         for(let i = 1; i <=totalpage; i++){
+  //           showPage.push(i)
+  //           setPagination(showPage)
+  //         }
+  //       }
+  //     }
+  // }, [nowPage]);
 
-    // 性別篩選
-    const handleGender = (data,selectGender)=>{
-      let newData = []
-      if(!(selectGender=='All')){
-        // 如果有篩選條件，數量結果設顯示
-        setFilter(true)
-        if(selectGender=='male'){
-          newData = data.filter((v)=>{
-            return v.gender==selectGender
-          })
-        }
-        if(selectGender=='female'){
-          newData = data.filter((v)=>{
-            return v.gender==selectGender
-          })
-        }
-      }else{
-        newData=[...data]
-      }
-      return newData
-    }
-    //  處理國家篩選
-    const handleCountry = (data,selectCountry)=>{
-      let newData = []
-      if(!(selectCountry=='All')){
-        setFilter(true) 
-        newData = data.filter((v)=>{
-          return v.location.country==selectCountry
-        })
-      }else{
-        newData=[...data]
-      }
-      return newData
-    }
+
+    // const handleGender = (data,selectGender)=>{
+    //   let newData = []
+    //   if(!(selectGender=='All')){
+    //     setFilter(true)
+    //     if(selectGender=='male'){
+    //       newData = data.filter((v)=>{
+    //         return v.gender==selectGender
+    //       })
+    //     }
+    //     if(selectGender=='female'){
+    //       newData = data.filter((v)=>{
+    //         return v.gender==selectGender
+    //       })
+    //     }
+    //   }else{
+    //     newData=[...data]
+    //   }
+    //   return newData
+    // }
+
+    // const handleCountry = (data,selectCountry)=>{
+    //   let newData = []
+    //   if(!(selectCountry=='All')){
+    //     setFilter(true) 
+    //     newData = data.filter((v)=>{
+    //       return v.location.country==selectCountry
+    //     })
+    //   }else{
+    //     newData=[...data]
+    //   }
+    //   return newData
+    // }
     //  篩選完資料在處理成展示的資料
     useEffect(() => {
       let filterData=[]
@@ -134,16 +89,7 @@ const Admin = (props) => {
 
     }, [selectGender,selectCountry]);
 
-    // checked 資料處理
-    // let checkedAr=[]
-    function checkUser(v) {
-      let checkedAr=[...checkedUser]
-      // checkedUser.push(v)
-      checkedAr.push(v)
-      console.log('checkAr',checkedAr)
-      // 存localstorage 
-      setCheckedUser(checkedAr)
-    }
+    
 
     useEffect(() => {
       console.log(checkedUser)

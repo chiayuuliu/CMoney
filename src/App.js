@@ -17,12 +17,12 @@ function App() {
   const [ userData, setUserData] = useState([])
   const [totalpage, setTotalpage] = useState(Math.ceil(userData.length/20))
   // 細節頁資訊
-  const [ detailInfo, setDetailInfo]= useState([])
+  const [ detailInfo, setDetailInfo]= useState({})
   const [ countryList, setCountryList] = useState([])
-  // 是否有登入
+  // 登入後更新login 狀態
   const [login, setLogin] = useState(false);
-  const [ checkedUser, setCheckedUser] = useState(0);
 
+  const [ checkedUser, setCheckedUser] = useState({});
 
   // 拿全部資料
   useEffect(() => {        
@@ -49,33 +49,13 @@ useEffect(() => {
   setCountryList(countryAr)
 }, [userData]);
 
-
-
-  // 判斷是否在登入頁面
-  // let login = window.location.pathname
-
-  // useEffect(() => {
-  //   if(!login){
-  //     props.history.push('/login')
-  //   }
-  // }, [login]);
-
   return (
     <>
-    {/* {login ? '' :
-    <Nav
-      login={login}
-      setLogin={setLogin}
-    />}  */}
-    {/* {login.includes('login') ? '' :<Nav/>}   */}
-    {/* {login ? '' :<Nav setLogin={setLogin}/>}     */}
-    
     <Router>
     <Nav
         login={login}
         setLogin={setLogin}
       />
-
       <Switch>
         {/* 自選清單頁 */}
         <Route path="/customer">
@@ -102,6 +82,7 @@ useEffect(() => {
         {/* 首頁(圖表) */}
         <Route path="/">
           <Cmoney
+            login={login}
             userData={userData}
             totalpage={totalpage}
             detailInfo={detailInfo}

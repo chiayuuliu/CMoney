@@ -24,9 +24,11 @@ const Login = (props) => {
         
         if(emailInput==account && pwdInput==pwd){
             passAlert.style.display='block' 
-            setLogin(true)
-            console.log('登入成功')
-            props.history.push('/')  
+            
+            setTimeout(() => {
+                setLogin(true)
+                props.history.push('/admin')  
+            }, 1500);
 
         }else{
             failAlert.style.display='block'

@@ -100,7 +100,6 @@
   padding-left: 8px;
   background-color: rgba(0, 0, 0, 0.459);
   color: white;
-  /* text-align: center; */
   position: absolute;
   height: 25px;
   line-height: 25px;
@@ -265,7 +264,6 @@
   justify-content: center;
   align-items: center;
   display: none;
-  /* display: flex; */
 }
 .dt-wrap{
   width: 70%;
@@ -274,7 +272,6 @@
   height: 70%;
   box-sizing: border-box;
   padding: 20px;
-  /* margin: auto auto; */
 }
 .dt-card{
   display: flex;
@@ -289,7 +286,9 @@
   height: 70%;
   background-color: wheat;
 }
-
+.dt-info p{
+  margin-bottom: 0;
+}
 /* 會員列表 */
 
 /* .memberwrap{
@@ -353,7 +352,7 @@
 table{
   margin-top: 50px;
 }
-/* cellspacing="0" */
+
 table {
   border-collapse:collapse;
 }

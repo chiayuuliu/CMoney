@@ -13,7 +13,12 @@ function Nav(props) {
     const handlingLogin = (e) => {
         props.history.push('/login')
     }
-    console.log('login',login);
+    const path = window.location.pathname
+    // console.log('未登入&& login 頁',(path.includes('login'))&& !login)
+    // console.log('login', login)
+
+
+
     return (
     <>
     <div className='nav'
@@ -32,13 +37,13 @@ function Nav(props) {
                 handlingLogout()
                 setLogin(false)
             }}
-            style={{display: login ? 'block' : 'none' }}
+            // style={{display: login ? 'block' : 'none' }}
             >登出</button>
     </div>
 
-
+    {/* 未登入狀態時的nav，但在登入頁必須消失 */}
     <div className='nav'
-        style={{display: login ? 'none' : 'flex' }}
+        style={{display: (path.includes('login'))|| login ? 'none' : 'flex' }}
         >
         <div className="logo">
             <Link to="/"><img src="http://localhost:3000/logo.png" alt/></Link>
@@ -49,7 +54,7 @@ function Nav(props) {
             // setLogin(true)
             handlingLogin()
         }}
-        style={{display: login ? 'none' : 'block' }}
+        // style={{display: login ? 'none' : 'block' }}
         >登入</button>
     </div>
     </>

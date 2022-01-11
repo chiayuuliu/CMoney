@@ -7,7 +7,7 @@ import Spinner from './../components/Spinner'
 
 const Cmoney = (props) => {
     // 全部user、總頁數從頂層來
-    const {userData, totalpage,detailInfo,setDetailInfo} = props
+    const {userData, totalpage,detailInfo,setDetailInfo,login} = props
     // 儲存全部的頁數陣列
     // const [PageAr, setPageAr] = useState([])
     // 呈現的頁數
@@ -19,8 +19,6 @@ const Cmoney = (props) => {
     // 細節頁開關，預設是不顯示
     const [ detailDisplay, setDetailDisplay] = useState(false)
 
-    // 判斷是否登入
-    const [ login, setLogin] = useState('登入');
 
     // 一開始spinner 設定關閉
     let [ loading, setLoading] = useState(false)
@@ -31,7 +29,8 @@ const Cmoney = (props) => {
         }
     })
 
-    function setCookie(login) {
+    // 設定cookie
+    function setCookie() {
         let now = new Date() // 現在時間
         let time = 60000 //有效時間一分鐘
         let expTime = now.getTime()+ time // 過期時間現在時間+ 一分鐘
@@ -51,13 +50,12 @@ const Cmoney = (props) => {
     }
     function delCookie() {
         console.log('del');
-        document.cookie = `${login}=''; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+        document.cookie = `login=''; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
     }
     // setCookie()
-    delCookie()
-    console.log('cookie',document.cookie);
+    // delCookie()
+    // console.log('cookie',document.cookie);
     
-
     // 目前頁數有變化的時候，去修改顯示的資料&調整頁碼的呈現
     useEffect(() => {
         
@@ -77,9 +75,7 @@ const Cmoney = (props) => {
 
     return (
     <>
-    <Spinner
-        loading={loading}
-    />
+    <Spinner loading={loading}/>
     
     <div className="wrap"
     style={{display: loading ? 'none' : 'flex' }}>
@@ -89,9 +85,11 @@ const Cmoney = (props) => {
             return(
             <div class="user"
                 onClick={()=>{
+                    if(login){
                     // 設定細節頁資訊
                     setDetailInfo(v)
                     setDetailDisplay(true)
+                    }                   
                 }}>
             <Usercard
                 avatar={v.picture.large}
@@ -99,7 +97,6 @@ const Cmoney = (props) => {
                 country={v.location.country}
                 city={v.location.city}
                 gender={v.gender}
-                
             />
             </div>)
         })}
