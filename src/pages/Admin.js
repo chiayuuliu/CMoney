@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Pagination from './../components/Pagination';
+import Editform from './../components/Editform';
 import Spinner from './../components/Spinner'
 
 
@@ -25,7 +25,16 @@ const Admin = (props) => {
     const [pagination, setPagination] = useState([])
     // spinner 開關 
     let [ loading, setLoading] = useState(false)
+    // 編輯頁資料
+    const [ editInfo, setEditInfo]= useState({})
+    const [ editDisplay, setEditDisplay]= useState(false)
 
+
+    window.addEventListener('keydown',(e)=>{
+      if(e.key=='Escape'){
+        setEditDisplay(false)
+      }
+  })
 
     useEffect(() => {
       // spinner 設定
@@ -231,7 +240,12 @@ const Admin = (props) => {
                 <td>{v.dob.age}</td>
                 <td>{v.location.country}</td>
                 <td>{v.email}</td>
-                <td><button>編輯</button></td>
+                <td><button 
+                  onClick={()=>{
+                    console.log(typeof v.gender)
+                    setEditDisplay(true)
+                    setEditInfo(v)
+                  }}>編輯</button></td>
               </tr>
               )
             })}
@@ -273,7 +287,12 @@ const Admin = (props) => {
             </div>
         </div>
     </div>
-    
+
+    <Editform
+      editInfo={editInfo}
+      editDisplay={editDisplay}
+      setEditDisplay={setEditDisplay}
+    /> 
     </>
     );
 };
