@@ -77,7 +77,6 @@ const Editform = (props) => {
                 </div>
             </div>
             <div class="btnwrap">
-                
                 <button class="confirm">確定</button>
                 <button class="cancel">取消</button>
             </div>

@@ -1,16 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { css } from '@emotion/react'
 import HashLoader
 from 'react-spinners/HashLoader'
 
 function Spinner(props) {
   const { loading } = props
-  // const override = css`
-  //   position: 'absolute',
-  //   top: 50%;
-  //   left: 47%;
-  //   transform: translate(-50%, -50%);
-  //   z-index: 100;
+
   const override = {
     position: 'absolute',
     top: '30%',

@@ -12,13 +12,11 @@ const Pagination = (props) => {
             for(let i = nowPage; i <=nowPage+4; i++){
                 showPage.push(i)
             }
-            // console.log(showPage)
             setPagination(showPage)
         }else{
             for(let i = 1; i <=totalpage; i++){
                 showPage.push(i)
             }
-            // console.log(showPage)
             setPagination(showPage)
         }       
     }, []);

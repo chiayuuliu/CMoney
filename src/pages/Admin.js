@@ -143,14 +143,10 @@ const Admin = (props) => {
     function handlecheckUser(v) {
       console.log('in')
       let checkedlist=[...checkedUser]
-      // console.log(v)
-      // checkedlist.v.name.first=v.login.username
       checkedlist.push(v.login.username)
-      // console.log('checkAr',checkedlist)
       // 存localstorage 
       localStorage.setItem('checklist',checkedlist)
       setCheckedUser(checkedlist)
-
     }
     function handleremoveUser(v) {
       localStorage.clear()

@@ -28,7 +28,6 @@ function Nav(props) {
         <div className="navlink">
             <Link to="/">首頁</Link>
             <Link to="/admin" 
-            // style={{display: (!document.cookie) ? 'none' : 'inline' }}
             >會員列表</Link>
             <Link to="/customer">自選清單</Link>
         </div>
@@ -50,10 +49,8 @@ function Nav(props) {
         </div>
         <button className="loginbtn" 
         onClick={()=>{
-            // setLogin(true)
             handlingLogin()
         }}
-        // style={{display: login ? 'none' : 'block' }}
         >登入</button>
     </div>
     </>

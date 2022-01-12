@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter , useHistory} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import { Link } from 'react-router-dom'
+
 
 const Login = (props) => {
     const {setLogin} = props
@@ -47,7 +47,6 @@ const Login = (props) => {
             </div>
             {/* 狀態提示語 */}
             <div className="login-success" >登入成功</div>
-
             <div className="login-fail">帳號或密碼有誤，請重新登入</div>
             <div className="loginwrap">
                 <div className="logo">

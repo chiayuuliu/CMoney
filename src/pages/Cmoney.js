@@ -35,10 +35,6 @@ const Cmoney = (props) => {
         let time = 60000 //有效時間一分鐘
         let expTime = now.getTime()+ time // 過期時間現在時間+ 一分鐘
         let expDate = new Date(expTime)
-
-        // console.log('現在時間',now)
-        // console.log('現在時間+有效時間(毫秒)',expTime)
-        // console.log('有效期限日期',new Date(expDate));
         document.cookie = `login=true; max-age= 6000`
         setTimeout(() => {
             console.log('7秒後cookie',document.cookie)
