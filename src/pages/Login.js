@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter , useHistory} from 'react-router-dom'
+import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
 
 const Login = (props) => {
@@ -8,12 +9,10 @@ const Login = (props) => {
     const [pwdInput, setpwdInput] = useState('')
     let history = useHistory()
     // 正式帳密
-    // const account = 'lucy.gutierrez@example.com'
-    // const pwd = 'passion'
+    const account = 'lucy.gutierrez@example.com'
+    const pwd = 'passion'
 
-    // 測試用
-    const account = 'a'
-    const pwd = 'a'
+    
 
     console.log(document.cookie)
     // 判斷是否有登入成功
@@ -22,9 +21,9 @@ const Login = (props) => {
         const passAlert = document.querySelector('.login-success')
         const failAlert = document.querySelector('.login-fail')
         
-        if(emailInput==account && pwdInput==pwd){
+        if((emailInput.trim())==account && (pwdInput.trim())==pwd){
             passAlert.style.display='block' 
-            
+            Cookies.set(`login`, 'true',{ expires: 1 }) 
             setTimeout(() => {
                 setLogin(true)
                 props.history.push('/admin')  
@@ -55,13 +54,13 @@ const Login = (props) => {
                     <img src="http://localhost:3000/logo.png" alt/>
                 </div>
                 <div className="txt-login">請登入</div>
-                <form action="">
+                <form>
                     <div className="inputwrap">
                         <input 
                         type="email" 
                         placeholder="電子郵件"
                         value={emailInput}
-                        required
+                        required="required"
                         onChange={(e)=>{
                             setEmailInput(e.target.value)
                         }}
@@ -77,17 +76,18 @@ const Login = (props) => {
                         />
                     </div>
                     <div className="btn-wrap">
-                        <button type="submit"
+                        <button 
+                        type="submit"
                         onClick={(e)=>{
                             e.preventDefault()
                             if(pwdInput && emailInput){
                                 isPassed(pwdInput,emailInput)
                             }else{
-                                console.log('no')
-                                // **這邊要加警示語  
+                                alert('不能為空值')
                             }
                         }}>送出</button>
-                        <button type="submit"
+                        <button 
+                        type="submit"
                         onClick={(e)=>{
                             e.preventDefault()
                             setEmailInput('')

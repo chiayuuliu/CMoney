@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, withRouter , useHistory} from 'react-router-dom'
+import Cookies from 'js-cookie'
+
 
 function Nav(props) {
     let history = useHistory()
@@ -14,10 +16,6 @@ function Nav(props) {
         props.history.push('/login')
     }
     const path = window.location.pathname
-    // console.log('未登入&& login 頁',(path.includes('login'))&& !login)
-    // console.log('login', login)
-
-
 
     return (
     <>
@@ -29,15 +27,17 @@ function Nav(props) {
         </div>
         <div className="navlink">
             <Link to="/">首頁</Link>
-            <Link to="/admin">會員列表</Link>
+            <Link to="/admin" 
+            // style={{display: (!document.cookie) ? 'none' : 'inline' }}
+            >會員列表</Link>
             <Link to="/customer">自選清單</Link>
         </div>
         <button className="loginbtn" 
             onClick={()=>{
                 handlingLogout()
                 setLogin(false)
+                Cookies.remove('login')
             }}
-            // style={{display: login ? 'block' : 'none' }}
             >登出</button>
     </div>
 
@@ -48,7 +48,6 @@ function Nav(props) {
         <div className="logo">
             <Link to="/"><img src="http://localhost:3000/logo.png" alt/></Link>
         </div>
-
         <button className="loginbtn" 
         onClick={()=>{
             // setLogin(true)

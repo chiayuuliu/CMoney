@@ -10,6 +10,8 @@ import Nav from './components/Nav';
 import Login from './pages/Login';
 import Cmoney from './pages/Cmoney';
 import Admin from './pages/Admin';
+import Cookies from 'js-cookie'
+
 // import Customer from './pages/Customer';
 
 function App() {
@@ -19,11 +21,12 @@ function App() {
   // 細節頁資訊
   const [ detailInfo, setDetailInfo]= useState({})
   const [ countryList, setCountryList] = useState([])
-  // 登入後更新login 狀態
+  // 登入後更新login 狀態(控制顯示畫面)
   const [login, setLogin] = useState(false);
 
-  const [ checkedUser, setCheckedUser] = useState({});
+  const [loginState, setLoginState] = useState('');
 
+  // console.log(!!Cookies.get('a'))
   // 拿全部資料
   useEffect(() => {        
     fetch('https://randomuser.me/api/?results=150')
@@ -36,6 +39,11 @@ function App() {
         setUserData(user)
         setTotalpage(Math.ceil(user.length/20))
     })
+}, []);
+useEffect(() => {
+  if(!!document.cookie){
+    setLogin(true)
+  }
 }, []);
 
 // 設定資料後生國家list往下傳
@@ -67,8 +75,6 @@ useEffect(() => {
           <Admin
             userData={userData}
             countryList={countryList}
-            checkedUser={checkedUser}
-            setCheckedUser={setCheckedUser}
           />
         </Route>
 
@@ -76,6 +82,8 @@ useEffect(() => {
         <Route path="/login">
           <Login
             setLogin={setLogin}
+            loginState={loginState}
+            setLoginState={setLoginState}
           />
         </Route>
 

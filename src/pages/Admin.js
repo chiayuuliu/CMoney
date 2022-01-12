@@ -5,12 +5,10 @@ import Spinner from './../components/Spinner'
 
 
 const Admin = (props) => {
-    const {userData, countryList,checkedUser, setCheckedUser} = props
+    const {userData, countryList} = props
     const [ nowPage, setNowPage] = useState(1)
     // 展示的資料
     const [ userList, setuserList] = useState([]);
-    // 打勾的數量
-    // const [ checkedQty, setcheckedQty] = useState();
     const [ totalpage, setTotalpage] = useState(0)
     const [ selectCountry, setSelectCountry] = useState('All')
     const [ selectGender, setSelectGender] = useState('All')
@@ -29,13 +27,14 @@ const Admin = (props) => {
     const [ editInfo, setEditInfo]= useState({})
     const [ editDisplay, setEditDisplay]= useState(false)
 
+    // 勾選到的資料
+    const [checkedUser, setCheckedUser] = useState([]);
 
     window.addEventListener('keydown',(e)=>{
       if(e.key=='Escape'){
         setEditDisplay(false)
       }
   })
-
     useEffect(() => {
       // spinner 設定
       setLoading(true)
@@ -48,9 +47,7 @@ const Admin = (props) => {
 
     useEffect(() => {
       handleDisplayList(nowPage,filterData)
-
     }, [filterData,nowPage]);
-
     // 處理陳列的資料，頁數變動、篩選、都要從新設定
     const handleDisplayList =(nowPage, data)=>{
       setTotalpage(Math.ceil(data.length/10))
@@ -58,7 +55,6 @@ const Admin = (props) => {
       let displayData = data.slice((nowPage-1)*10,(nowPage*10))
       setuserList(displayData)
     }
-
     // 生成總頁數
     useEffect(() => {
       let showPage=[]
@@ -144,20 +140,23 @@ const Admin = (props) => {
     }, [selectGender,selectCountry]);
 
     // checked 資料處理
-    // let checkedAr=[]
-    function checkUser(v) {
-      let checkedAr=[...checkedUser]
-      // checkedUser.push(v)
-      checkedAr.push(v)
-      console.log('checkAr',checkedAr)
+    function handlecheckUser(v) {
+      console.log('in')
+      let checkedlist=[...checkedUser]
+      // console.log(v)
+      // checkedlist.v.name.first=v.login.username
+      checkedlist.push(v.login.username)
+      // console.log('checkAr',checkedlist)
       // 存localstorage 
-      setCheckedUser(checkedAr)
-    }
+      localStorage.setItem('checklist',checkedlist)
+      setCheckedUser(checkedlist)
 
-    useEffect(() => {
-      console.log(checkedUser)
-    }, [checkedUser]);
-  
+    }
+    function handleremoveUser(v) {
+      localStorage.clear()
+    } 
+
+    console.log('checklist', typeof (localStorage.getItem('checklist')))
     return (
     <>
     <Spinner
@@ -227,10 +226,9 @@ const Admin = (props) => {
                 <td><input type="checkbox" 
                   onChange={(e)=>{
                     if(e.target.checked){
-                      v.checked=true
-                      checkUser(v)
+                      handlecheckUser(v)
                     }else{
-                      v.checked=false
+                      handleremoveUser(v)
                     }
                 }}/></td>
                 <td><img src={v.picture.large} alt=""/></td>
@@ -242,7 +240,6 @@ const Admin = (props) => {
                 <td>{v.email}</td>
                 <td><button 
                   onClick={()=>{
-                    console.log(typeof v.gender)
                     setEditDisplay(true)
                     setEditInfo(v)
                   }}>編輯</button></td>
@@ -273,7 +270,6 @@ const Admin = (props) => {
                     }}>{v}</div>
                     )})
                 }
-            
           {/* 後一頁 */}
             <div class="next-page" 
             onClick={(e)=>{
@@ -288,11 +284,11 @@ const Admin = (props) => {
         </div>
     </div>
 
-    <Editform
-      editInfo={editInfo}
-      editDisplay={editDisplay}
-      setEditDisplay={setEditDisplay}
-    /> 
+      <Editform
+        editInfo={editInfo}
+        editDisplay={editDisplay}
+        setEditDisplay={setEditDisplay}
+      /> 
     </>
     );
 };
